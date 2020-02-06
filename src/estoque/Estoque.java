@@ -2,6 +2,8 @@ package estoque;
 
 import java.util.Scanner;
 
+import conexoes.ConexaoComBanco;
+
 public class Estoque {
 	String desc;
 	int qtd;
@@ -24,15 +26,21 @@ public class Estoque {
 				
 		
 			
-	//Metodo que adiciona um novo produto.
+	/**
+	* O metodo {@code adicionarProduto} estabelece uma conexao com o banco de dados.
+	* @return nao ha retornos
+	*/		
 	public String adicionarProduto() {
-			new Produto(desc, qtd);
+			Produto prod = new Produto();
 			System.out.print("Insira a descricao do produto:");
-			desc = new Scanner(System.in).nextLine();
-			
+			prod.setDescricao(new Scanner(System.in).nextLine());
 			System.out.println("Insira a quantidade do produto:");
-			qtd = new Scanner(System.in).nextInt();
-			
+			prod.setQuantidade(new Scanner(System.in).nextInt());
+			new ConexaoComBanco().salvarProduto(prod);
 			return "Produto adicionado com sucesso!";
 	}	
+	
+	public String buscarProduto() {
+		
+	}
 }
